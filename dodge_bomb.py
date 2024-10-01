@@ -4,7 +4,9 @@ import pygame as pg
 import random
 import time
 
-
+"""
+コメント
+"""
 WIDTH, HEIGHT = 1100, 650
 DELTA = {
     pg.K_UP:(0,-5),
@@ -28,7 +30,7 @@ def check_bound(obj_rct:pg.Rect) -> tuple[bool, bool]:
     return yoko, tate
 
 def game_over(screen): #追加機能1
-    bo =pg.Surface((WIDTH,HEIGHT))
+    bo =pg.Surface((WIDTH, HEIGHT))
     pg.draw.rect(bo, (0,0,0), pg.Rect(0,0,WIDTH,HEIGHT))
     bo.set_alpha(155)
     kk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
