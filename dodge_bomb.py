@@ -27,7 +27,7 @@ def check_bound(obj_rct:pg.Rect) -> tuple[bool, bool]:
         tate = False
     return yoko, tate
 
-def game_over(screen):
+def game_over(screen): #追加機能1
     bo =pg.Surface((WIDTH,HEIGHT))
     pg.draw.rect(bo, (0,0,0), pg.Rect(0,0,WIDTH,HEIGHT))
     bo.set_alpha(155)
@@ -45,6 +45,27 @@ def game_over(screen):
     screen.blit(kk2_img,kk2_rct)
     pg.display.update()
     time.sleep(5)
+
+def game_clear(screen): #何秒間生き残ったらクリア画面を表示(現在は約10秒)
+    bo =pg.Surface((WIDTH,HEIGHT))
+    pg.draw.rect(bo, (0,0,0), pg.Rect(0,0,WIDTH,HEIGHT))
+    bo.set_alpha(155)
+    kk_img = pg.transform.rotozoom(pg.image.load("fig/6.png"), 0, 0.9)
+    kk_rct = kk_img.get_rect()
+    kk_rct.center = 300, 350
+    kk2_img = pg.transform.rotozoom(pg.image.load("fig/9.png"), 0, 0.9)
+    kk2_rct = kk2_img.get_rect()
+    kk2_rct.center = 780, 350
+    fonto = pg.font.Font(None, 80)
+    txt = fonto.render("GAME CLEAR", True, (255, 255, 255))
+    screen.blit(bo, [0, 0])
+    screen.blit(txt, [350, HEIGHT/2])
+    screen.blit(kk_img,kk_rct)
+    screen.blit(kk2_img,kk2_rct)
+    pg.display.update()
+    time.sleep(5)
+    
+
 
 
 
@@ -102,6 +123,9 @@ def main():
         pg.display.update()
 
         tmr += 1
+        if tmr == 500:
+            game_clear(screen)
+            return
         clock.tick(50)
 
 
