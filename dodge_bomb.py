@@ -27,8 +27,10 @@ def check_bound(obj_rct:pg.Rect) -> tuple[bool, bool]:
         tate = False
     return yoko, tate
 
-def game_over():
-    screen = pg.display.set_mode((WIDTH, HEIGHT))
+def game_over(screen):
+    bo =pg.Surface((WIDTH,HEIGHT))
+    pg.draw.rect(bo, (0,0,0), pg.Rect(0,0,WIDTH,HEIGHT))
+    bo.set_alpha(155)
     kk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
     kk_rct = kk_img.get_rect()
     kk_rct.center = 350, 350
@@ -37,6 +39,7 @@ def game_over():
     kk2_rct.center = 780, 350
     fonto = pg.font.Font(None, 80)
     txt = fonto.render("GAME OVER", True, (255, 255, 255))
+    screen.blit(bo, [0, 0])
     screen.blit(txt, [400, HEIGHT/2])
     screen.blit(kk_img,kk_rct)
     screen.blit(kk2_img,kk2_rct)
@@ -66,7 +69,7 @@ def main():
                 return
         screen.blit(bg_img, [0, 0]) 
         if kk_rct.colliderect(bb_rct):
-            game_over()
+            game_over(screen)
             return
 
         key_lst = pg.key.get_pressed()
